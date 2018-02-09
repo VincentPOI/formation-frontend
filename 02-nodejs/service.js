@@ -2,14 +2,25 @@ var data = require("./data/devfest-2015.js");
 var tabPres = data.speakers;
 
 exports.listerTousLesPresentateurs = function(){
-  return data.speakers;
+  var tbody = data.speakers.map(function(speaker) {
+  return (speaker.id+" : "+ speaker.firstname+" "+speaker.lastname);
+  }).join("\n")
+  return tbody;
 };
 exports.listerToutesLesSessions = function(){
-  return data.sessions;
+
+  var tbody = data.sessions.map(function(session) {
+  return (session.id+" : "+ session.title+" "+session.confRoom);
+  }).join("\n")
+  return tbody;
 };
 exports.trouverUneSession = function (idSession){
-  return data.sessions.filter((session) => session.id == idSession);
+  session = data.sessions.find((s) => s.id == idSession);
+  return (session.id+" : " +session.title+" "+session.confRoom);
 };
 exports.listerTopPresentateurs = function(){
-  return data.speakers.filter((speaker) => speaker.topspeaker == true);
+  var tbody = data.speakers.filter((speaker) => speaker.topspeaker == true).map(function(speaker) {
+  return (speaker.id+" : "+ speaker.firstname+" "+speaker.lastname);
+  }).join("\n")
+  return tbody;
 };
